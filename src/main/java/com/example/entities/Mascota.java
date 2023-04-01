@@ -36,7 +36,7 @@ public class Mascota implements Serializable{
     private String raza; 
     private Genero genero; 
 
-    private enum Genero{
+    public enum Genero{
         MACHO, HEMBRA
     }
 
