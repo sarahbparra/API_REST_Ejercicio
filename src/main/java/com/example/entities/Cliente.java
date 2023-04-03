@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,10 +42,17 @@ public class Cliente implements Serializable{
     // @Temporal(TemporalType.TIMESTAMP)
     private LocalDate fechaAlta; 
 
+    @NotNull
+    private String imagenCliente; 
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST) 
+    // @JsonManagedReference
     private Hotel hotel; 
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "cliente") 
+    // @JsonBackReference //A la entidad que se llama. No se puede usar esta anotación, porque es 
+    // //una colección. 
+    // @JsonIgnore
     private List<Mascota> mascotas; 
 
 

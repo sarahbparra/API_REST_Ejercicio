@@ -13,8 +13,9 @@ import com.example.entities.Cliente;
 public interface ClienteDao extends JpaRepository<Cliente, Long> {
     
     //#1.- Método que me recupere la lista de clientes ordenados. 
-    @Query(value = "select c from Cliente c left join fetch c.hotel")
-
+    // @Query(value = "select c from Cliente c left join fetch c.hotel left join fetch c.mascotas")
+    // @Query(value = "select c from Cliente c left join fetch c.mascotas left join fetch c.hotel")
+    @Query(value = "select c from Cliente c inner join fetch c.mascotas left join fetch c.hotel")
     public List<Cliente> findAll(Sort sort); 
 
     //#2.- Método para sacar una página de cliente
@@ -28,7 +29,8 @@ public interface ClienteDao extends JpaRepository<Cliente, Long> {
 
     //No muestra las mascotas porque la unión es de onetomany en clientes. No es capaz de devolver 
     //múltiples filas para el mismo registro. 
-    @Query(value = "select c from Cliente c left join fetch c.hotel left join fetch c.mascotas where c.id = :id")
+    // @Query(value = "select c from Cliente c left join fetch c.hotel left join fetch c.mascotas where c.id = :id")
+    @Query(value = "select c from Cliente c left join fetch c.hotel where c.id = :id")
     public Cliente findById(long id); 
 
 

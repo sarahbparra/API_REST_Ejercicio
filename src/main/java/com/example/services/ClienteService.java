@@ -14,6 +14,6 @@ public interface ClienteService {
     public Page<Cliente> findAll(Pageable pageable); 
     public Cliente findById(long id);
     public Cliente save(Cliente cliente); 
-    public void delete(Cliente cliente); 
+    public void delete(Cliente cliente);
     
 }

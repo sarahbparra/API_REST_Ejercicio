@@ -3,8 +3,8 @@ package com.example.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
+import com.example.entities.Cliente;
 import com.example.entities.Mascota;
 
 public interface MascotaDao extends JpaRepository<Mascota, Long>{
@@ -14,7 +14,10 @@ public interface MascotaDao extends JpaRepository<Mascota, Long>{
 
     //#1.- Método que recupera las mascotas de un cliente a partir del id del cliente(?)
     
-    @Query(value = "select m from Mascota m join fetch m.cliente where cliente.id = :id")
-    public List<Mascota> findMascotasByIdCliente(long id); 
+    // @Query(value = "select m from Mascota m join fetch m.cliente where cliente.id = :id")
+    // @Query("SELECT m FROM Mascota m left join fetch m.cliente c WHERE c.id = :id")
+    // public List<Mascota> findMascotasByIdCliente(@Param("id") Long id); 
+    List<Mascota> findByCliente(Cliente cliente);
+    long deleteByCliente (Cliente cliente); 
 
 }

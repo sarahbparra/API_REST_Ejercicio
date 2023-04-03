@@ -3,6 +3,8 @@ package com.example.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -34,6 +36,8 @@ public class Mascota implements Serializable{
 
     private String nombre; 
     private String raza; 
+
+    // @Enumerated(EnumType.STRING)
     private Genero genero; 
 
     public enum Genero{
@@ -45,6 +49,9 @@ public class Mascota implements Serializable{
     private LocalDate fechaNacimiento; 
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST) 
+    @JsonIgnore
+    // @JsonManagedReference
+    // @JsonIgnoreProperties(value = "nombre") //ANOTACIÓN A NIVEL DE CLASE 
     private Cliente cliente; 
 
 }
