@@ -34,8 +34,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.entities.Cliente;
+import com.example.entities.Mascota;
 import com.example.model.FileUploadResponse;
 import com.example.services.ClienteService;
+import com.example.services.MascotaService;
 import com.example.utilities.FileDownloadUtil;
 import com.example.utilities.FileUploadUtil;
 
@@ -49,8 +51,8 @@ public class ClienteController {
     @Autowired 
     private ClienteService clienteService; 
 
-    // @Autowired 
-    // private MascotaService mascotaService; 
+    @Autowired 
+    private MascotaService mascotaService; 
 
     @Autowired 
     private FileUploadUtil fileUploadUtil; 
@@ -269,7 +271,11 @@ public class ClienteController {
 
          Cliente clienteDB = clienteService.save(cliente); 
 
-         
+         List<Mascota> mascotas = mascotaService.findAll();
+
+         mascotas.stream().filter(m -> m.getCliente() == null)
+         .forEach(m -> m.setCliente(clienteDB));
+
 
         try {
             
